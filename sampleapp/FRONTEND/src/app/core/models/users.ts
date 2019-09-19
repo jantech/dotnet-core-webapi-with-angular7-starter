@@ -11,4 +11,5 @@ export interface Users {
 export interface Skill {
     id: number;
     skillName: string;
+    createdDate: Date;
 }

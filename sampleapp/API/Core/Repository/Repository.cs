@@ -23,7 +23,7 @@ namespace sampleapp.Core.Repository
 
         public IEnumerable<User> GetUsers()
         {
-            return dbContext.Users.AsNoTracking().ToList();
+            return dbContext.Users.Include("Skills").AsNoTracking().ToList();
         }
         
     }

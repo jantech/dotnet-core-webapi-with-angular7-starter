@@ -41,7 +41,7 @@ namespace sampleapp
             });
 
             services.AddScoped<IRepository, Repository>();
-            services.AddScoped<ISeedData, SeedData>();
+            services.AddTransient<ISeedData, SeedData>();
 
             services.AddSwaggerGen(c =>
             {
@@ -58,7 +58,7 @@ namespace sampleapp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ISeedData seedData)
         {
             if (env.IsDevelopment())
             {
@@ -99,7 +99,14 @@ namespace sampleapp
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api - v1");
             });
 
-            
+            try
+            {
+                seedData.InitData();
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
 
             /*app.UseMvc(routes =>
             {

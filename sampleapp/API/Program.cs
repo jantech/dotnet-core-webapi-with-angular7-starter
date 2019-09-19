@@ -19,7 +19,7 @@ namespace sampleapp
             var host = CreateWebHostBuilder(args).Build();
 
             // seed the data
-            using (var scope = host.Services.CreateScope())
+            /*using (var scope = host.Services.CreateScope())
             {
 
                 var services = scope.ServiceProvider;
@@ -33,7 +33,7 @@ namespace sampleapp
                     var msg = ex.Message;
                 }
 
-            }
+            }*/
 
             host.Run();
 

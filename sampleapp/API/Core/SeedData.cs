@@ -68,8 +68,8 @@ namespace sampleapp.Core
                     Password = "test@123",
                     Skills = new List<Skill>{
                         skill1,
-                        skill3,
-                        skill5,
+                        skill2,
+                        skill7,
                     },
                     CreatedDate = DateTime.Now
                 };
