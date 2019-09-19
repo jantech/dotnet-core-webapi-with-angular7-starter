@@ -3,5 +3,19 @@
 </h2>
 
 <ol>
-  <li *ngFor="let item of result">{{ item }}</li>
+  <li *ngFor="let item of result">{{ item.firstName }} - <span>{{item.createdDate | date:'medium' }}</span></li>
 </ol>
+
+<form name="register" [formGroup]="registerForm" (ngSubmit)="addUser()">
+
+  <label>First Name: </label>
+  <input type="text" formControlName="firstName" /> <br>
+
+  <label>Last Name: </label>
+  <input type="text" formControlName="lastName" /> <br>
+
+  <label>Password: </label>
+  <input type="password" formControlName="password" /> <br>
+
+  <button type="submit">Submit</button>
+</form>

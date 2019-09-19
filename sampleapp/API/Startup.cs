@@ -10,6 +10,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using sampleapp.Helpers;
 using System;
+using sampleapp.Core;
+using Microsoft.EntityFrameworkCore;
+using sampleapp.Core.Repository;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace sampleapp
 {
@@ -29,6 +33,25 @@ namespace sampleapp
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "wwwroot";
+            });
+
+            services.AddDbContext<ApplicationDbContext>(dbContext =>
+            {
+                dbContext.UseInMemoryDatabase("SAMPLE_DB");
+            });
+
+            services.AddScoped<IRepository, Repository>();
+            services.AddScoped<ISeedData, SeedData>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Api",
+                    Description = "Api Documentation",
+                    TermsOfService = "None",
+                });
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -69,6 +92,15 @@ namespace sampleapp
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.DocumentTitle = "Swagger UI - Application";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api - v1");
+            });
+
+            
+
             /*app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -84,19 +116,18 @@ namespace sampleapp
                 );
             });
 
-            app.UseSpa(spa=>{
+            app.UseSpa(spa =>
+            {
                 spa.Options.SourcePath = "../FRONTEND";
 
-                if(env.IsDevelopment()) {
+                if (env.IsDevelopment())
+                {
                     spa.UseAngularCliServer(npmScript: "start");
                     spa.Options.StartupTimeout = TimeSpan.FromSeconds(120);
                     // spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
 
             });
-            
-
-            
 
         }
     }
