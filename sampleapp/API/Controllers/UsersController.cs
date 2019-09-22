@@ -38,6 +38,11 @@ namespace sampleapp.Controllers
             return Ok(value: _repo.GetUsers());
         }
 
-        
+        [HttpGet, Route("{id}")]
+        public IActionResult GetUser(int id)
+        {
+            return Ok(value: _repo.GetUserById(id));
+        }
+
     }
 }

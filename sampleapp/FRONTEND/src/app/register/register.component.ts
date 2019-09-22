@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Users } from 'src/app/core/models/users';
+import { User } from 'src/app/core/models/users';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../core/services/users.service';
 import { Subscription } from 'rxjs';
@@ -12,13 +12,10 @@ import { Subscription } from 'rxjs';
 })
 export class RegisterComponent implements OnInit, OnDestroy {
 
-  result: Users[];
-  unsubscriber: Subscription[] = [];
+  unsubscriber: Subscription;
   registerForm: FormGroup;
 
-  constructor(private http: HttpClient,
-              @Inject('BASE_URL') private apiEndpoint: string,
-              private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
               private userService: UserService) {
 
     this.registerForm = this.formBuilder.group({
@@ -26,18 +23,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
       lastName: [''],
       password: [null, Validators.required],
     });
-    this.getUsers();
   }
 
   ngOnDestroy() {
-    this.unsubscriber.forEach(x => {
-      x.unsubscribe();
-    });
+    if (this.unsubscriber) {
+      this.unsubscriber.unsubscribe();
+    }
   }
 
   ngOnInit() {
-
-    console.log('api end point: ' + this.apiEndpoint);
 
   }
 
@@ -56,23 +50,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     const newUser = this.registerForm.value;
 
-    this.unsubscriber.push(this.userService.addUser(newUser).subscribe(res => {
+    this.unsubscriber = this.userService.addUser(newUser).subscribe(res => {
 
       console.log(res);
 
-      this.getUsers();
-
     }, (err) => {
       console.log(err);
-    }));
-
-  }
-
-  getUsers() {
-
-    this.unsubscriber.push(this.userService.getUsers().subscribe(res => {
-      this.result = res;
-    }));
+    });
 
   }
 

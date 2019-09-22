@@ -26,5 +26,8 @@ namespace sampleapp.Core.Repository
             return dbContext.Users.Include("Skills").AsNoTracking().ToList();
         }
         
+        public User GetUserById(int id) {
+            return dbContext.Users.Include("Skills").AsNoTracking().FirstOrDefault(s=>s.Id == id);
+        }
     }
 }

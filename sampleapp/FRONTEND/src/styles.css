@@ -2,4 +2,26 @@
 
 body{
     line-height: 25px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.div-50 {
+    border: 1px solid #cccccc;
+    display: inline-block;
+    width: 48%;
+    padding: 5px;
+    text-align: start;
+    vertical-align: top;
+    margin: 2px;
+}
+
+.divider {
+    border: 1px solid #cccccc;
+    border-collapse: collapse;
 }

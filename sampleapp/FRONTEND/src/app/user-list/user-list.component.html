@@ -1,0 +1,12 @@
+<p>
+  user-list works!
+</p>
+
+<ol>
+    <li *ngFor="let item of lstUsers">
+      {{ item.firstName }} - <span>{{item.createdDate | date:'medium' }}</span>
+      <span>&nbsp; <a routerLink="user/{{item.id}}">View-{{item.id}}</a></span>
+      <app-skill-list [skillList]="item.skills" ></app-skill-list>
+      <div class="divider"></div>
+    </li>
+  </ol>

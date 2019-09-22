@@ -8,12 +8,22 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { UserService } from './core/services/users.service';
 import { DemoComponent } from './demo/demo.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { SkillListComponent } from './skill-list/skill-list.component';
+import { SkillComponent } from './skill/skill.component';
+import { HomeComponent } from './home/home.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    DemoComponent
+    DemoComponent,
+    UserListComponent,
+    SkillListComponent,
+    SkillComponent,
+    HomeComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

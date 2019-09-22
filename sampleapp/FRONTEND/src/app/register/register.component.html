@@ -2,14 +2,6 @@
   Register
 </h2>
 
-<ol>
-  <li *ngFor="let item of result">
-    {{ item.firstName }} - <span>{{item.createdDate | date:'medium' }}</span>
-    <ul>
-      <li *ngFor="let skill of item.skills">{{ skill.skillName }}</li>
-    </ul>
-  </li>
-</ol>
 
 <form name="register" [formGroup]="registerForm" (ngSubmit)="addUser()">
 

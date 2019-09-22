@@ -2,8 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { DemoComponent } from './demo/demo.component';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
+  {
+    path: 'user/:id', component: UserProfileComponent
+  },
   {
     path: 'register', component: RegisterComponent
   },
@@ -11,10 +17,10 @@ const routes: Routes = [
     path: 'demo', component: DemoComponent
   },
   {
-    path: '', component: RegisterComponent
+    path: '', component: HomeComponent
   },
   {
-    path  : '**', component: RegisterComponent
+    path  : '**', component: HomeComponent
   }
 ];
 
