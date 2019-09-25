@@ -58,7 +58,7 @@ namespace sampleapp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ISeedData seedData)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -98,15 +98,6 @@ namespace sampleapp
                 c.DocumentTitle = "Swagger UI - Application";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api - v1");
             });
-
-            try
-            {
-                seedData.InitData();
-            }
-            catch (Exception ex)
-            {
-                var msg = ex.Message;
-            }
 
             /*app.UseMvc(routes =>
             {

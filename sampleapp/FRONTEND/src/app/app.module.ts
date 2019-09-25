@@ -13,6 +13,12 @@ import { SkillListComponent } from './skill-list/skill-list.component';
 import { SkillComponent } from './skill/skill.component';
 import { HomeComponent } from './home/home.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ValuesListComponent } from './values-list/values-list.component';
+
+import { StoreModule } from '@ngrx/store';
+
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -23,11 +29,19 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     SkillListComponent,
     SkillComponent,
     HomeComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ValuesListComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule
+    AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule,
+    StoreModule.forRoot({}, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
     UserService,

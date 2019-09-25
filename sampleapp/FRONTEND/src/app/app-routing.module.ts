@@ -5,6 +5,7 @@ import { DemoComponent } from './demo/demo.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ValuesListComponent } from './values-list/values-list.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,9 @@ const routes: Routes = [
   },
   {
     path: 'register', component: RegisterComponent
+  },
+  {
+    path: 'values-ngrx', component: ValuesListComponent
   },
   {
     path: 'demo', component: DemoComponent
